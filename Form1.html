@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html> 
+<head>
+
+    <style>
+        span{
+            color : red;
+        }
+    </style>
+    <h1 style="color: seagreen" aling ="center">Registration Form</h1> 
+    <title>Registration Form</title>
+	<meta charset="utf-8" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        function myForm()
+        {
+            //var name = document.getElementById('name').value;
+            //var reg = /(^[A-Za-z]$)/;
+            //if (reg.test(name) == false) {
+            //    var val = "Name Field Contains only Character";
+            //    document.getElementById('err0').innerHTML = val;
+            //    return false;
+            //}
+            var email1 = document.getElementById('email').value;
+            var reg = /[A-Za-z0-9_]@[a-z]{4,}\.[a-z]{2,3}$/;
+            var value = "<b><i>X<i><b>  invalid email please enter the correct format";
+            if (reg.test(email1) == false) {
+                document.getElementById('err').innerHTML = value;
+                return false;
+            }
+            var pass1 = document.getElementById('pass').value;
+            var reg = /(?=[A-Z]{1})(?=.*[a-z])(?=.*[@ & $ _ #]{2})(?=.*[0-9]).{8,15}$/
+            if (reg.test(pass1) == false) {
+                var val = "Please Enter the Correct Password"
+                document.getElementById('err1').innerHTML = val;
+                return false;
+
+            }
+            var phone = document.getElementById('phone').value;
+            var regex = /(^[0-9]{10}$)/;
+            var val = "Phone Number Should be Not Greater then 10 digits";
+            if (regex.test(phone) == false) {
+                var val = "Enter Correct Phone Number";
+                document.getElementById('err2').innerHTML = val;
+                return false;
+            }
+            if (grecaptcha.getResponse() == "") {
+                alert("Please Verify captcha");
+                return false;
+            }
+        }
+        
+    </script>
+</head>
+<body style="bgcolor:rgb(182, 255, 0)">
+    <form onsubmit="return myForm()" action="https://www.google.co.in/?gfe_rd=cr&dcr=0&ei=KwjCWpLzA4_K8AeWr7WwBw">
+        <!--Name : <input type="text"  id ="name" placeholder="Enter Your Name">
+               <span id="err0"></span><br>-->
+        Email : <input type="text" id="email"placeholder="Enter Your Email">
+                <span id="err"></span><br>
+        Password:<input type="text"  id="pass" placeholder="Password">
+                 <span id="err1"></span><br>
+        Phone Number:<input type="text" id="phone" placeholder="PhoneNumber">
+               <span id="err2"></span><br>
+        Address:<textarea type="textarea" placeholder="Enter Your Address"></textarea>
+        <div class="g-recaptcha" data-sitekey="6LcVZU4UAAAAAA1_xvrOVcKoEE_wG9vW_tsGnl3y"  data-callback="verifyRecaptchaCallback"></div><br>
+        <input type="submit" value="click me">
+        <input type="reset" value="reset">
+    </form>
+</body>
+</html>
